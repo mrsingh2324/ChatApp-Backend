@@ -6,9 +6,10 @@ const server = require('http').createServer(app);
 const cors = require('cors');
 app.use(cors());
 
-const io = require('socket.io')(server,{
-  cors:{
-    origin:"*"
+const io = require('socket.io')(server, {
+  cors: {
+    origin: "https://chat-app-frontend-psi.vercel.app",
+    methods: ["GET", "POST"]
   }
 });
 // const connectedSockets = {};
