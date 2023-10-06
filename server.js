@@ -1,18 +1,9 @@
-const express = require('express');
-const app = express();
 
-const server = require('http').createServer(app);
+const { Server } = require("socket.io");
 
-const cors = require('cors');
-app.use(cors());
-
-const io = require('socket.io')(server, {
-  cors: {
-    origin: "https://chat-app-frontend-psi.vercel.app",
-    methods: ["GET", "POST"]
-  }
+const io = new Server(8000, {
+  cors: true,
 });
-// const connectedSockets = {};
 
 io.on('connection', (socket) => {
   const socketId = socket.id;
@@ -21,9 +12,4 @@ io.on('connection', (socket) => {
     console.log(payload);
     io.emit("chat",payload) 
   })
-});
-
-
-server.listen(5000, () => {
-  console.log('Server listening on port 5000.');
 });
